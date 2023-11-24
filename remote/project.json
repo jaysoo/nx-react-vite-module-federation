@@ -1,7 +1,7 @@
 {
-  "name": "remote-1",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/remote-1/src",
+  "name": "remote",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "remote/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/remote-1"
+        "outputPath": "dist/remote"
       },
       "configurations": {
         "development": {
@@ -21,18 +21,27 @@
       }
     },
     "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run remote:build --watch",
+          "nx run remote:preview"
+        ]
+      }
+    },
+    "dev": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "remote-1:build"
+        "buildTarget": "remote:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "remote-1:build:development",
+          "buildTarget": "remote:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "remote-1:build:production",
+          "buildTarget": "remote:build:production",
           "hmr": false
         }
       }
@@ -41,14 +50,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "remote-1:build"
+        "buildTarget": "remote:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "remote-1:build:development"
+          "buildTarget": "remote:build:development"
         },
         "production": {
-          "buildTarget": "remote-1:build:production"
+          "buildTarget": "remote:build:production"
         }
       }
     },
@@ -57,14 +66,14 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/remote-1"
+        "reportsDirectory": "../../coverage/remote"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/remote-1/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["remote/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

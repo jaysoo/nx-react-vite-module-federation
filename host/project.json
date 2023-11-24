@@ -1,7 +1,7 @@
 {
-  "name": "remote-2",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/remote-2/src",
+  "name": "host",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "host/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/remote-2"
+        "outputPath": "dist/host"
       },
       "configurations": {
         "development": {
@@ -24,15 +24,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "remote-2:build"
+        "buildTarget": "host:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "remote-2:build:development",
+          "buildTarget": "host:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "remote-2:build:production",
+          "buildTarget": "host:build:production",
           "hmr": false
         }
       }
@@ -41,14 +41,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "remote-2:build"
+        "buildTarget": "host:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "remote-2:build:development"
+          "buildTarget": "host:build:development"
         },
         "production": {
-          "buildTarget": "remote-2:build:production"
+          "buildTarget": "host:build:production"
         }
       }
     },
@@ -57,14 +57,14 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/remote-2"
+        "reportsDirectory": "../../coverage/host"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/remote-2/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["host/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
