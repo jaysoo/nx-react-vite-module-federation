@@ -24,8 +24,8 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "nx run remote:build --watch",
-          "nx run remote:preview"
+          "nx run remote:build:production --watch",
+          "nx run remote:preview:production"
         ]
       }
     },

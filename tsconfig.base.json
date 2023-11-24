@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@acme/vite-module-federation": ["vite-module-federation/src/index.ts"],
       "remote/Module": ["remote/src/remote-entry.ts"]
     }
   },
