@@ -2,6 +2,31 @@
 
 This is an example of using Nx's project and file graphs to make configuring module federation easier.
 
+The goals are:
+
+1. Start host and remotes in a single command.
+2. Reduce boilerplate in `vite.config.ts` by using what Nx understands about our files and projects.
+
+For (2), the configuration shouldn't need to provide `shared` for example, since Nx already knows what dependencies are being used by all the projects.
+
+```ts
+// ..
+import { nxFederation } from '../nx-federation-plugin';
+export default defineConfig({
+  plugins: [
+    react(),
+    nxFederation({
+      name: 'host',
+      // no need to define full URL to remoteEntry.js since Nx can find the project by name and read the host+port.
+      remotes: ['remote'] 
+      // shared is missing but Nx will fill it in as ['react', 'react-dom', ...] 
+    }),
+    nxViteTsPaths()
+  ],
+  // ...
+});
+```
+
 Since there isn't an official module federation plugin, we're using the `@originjs/vite-plugin-federation`. This is the most widely used solution, and the most stable.
 
 Try it yourself!
@@ -53,6 +78,8 @@ The following is a quick explanation of the files in this repo. Check out the `h
 - Nx can automatically pick up shared dependencies so `shared` does not need to be define manually.
 - Nx understands the projects in the repo, so we can link to a remote by name rather than manually configuring the full URL to `remoteEntry.js`.
 - Nx task orchestration makes serving and build easier. Since remote has to run in preview mode (see painpoints), we can easily wire up `build --watch` at the same time.
+
+**Note:** You can easily do away with `nx-federation-plugin` and manually configure `@originjs/vite-plugin-federation` by hand. You will some of the benefits of using Nx, but the tasks defined in `project.json` files are still useful.
 
 ## Painpoints
 
